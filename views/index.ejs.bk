@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>menu calendar</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div id="app">
+      <button @click="showsan">san</button>
+      <div class="lists">
+        <ul><draggable :list="sunlist" class="dragArea" :options="{group:'lists'}"><li v-for="sun in sunlist">{{ sun }}</li></draggable></ul>
+        <ul><draggable :list="monlist" class="dragArea" :options="{group:'lists'}"><li v-for="mon in monlist">{{ mon }}</li></draggable></ul>
+        <ul><draggable :list="tuelist" class="dragArea" :options="{group:'lists'}"><li v-for="tue in tuelist">{{ tue }}</li></draggable></ul>
+        <ul><draggable :list="wedlist" class="dragArea" :options="{group:'lists'}"><li v-for="wed in wedlist">{{ wed }}</li></draggable></ul>
+        <ul><draggable :list="thulist" class="dragArea" :options="{group:'lists'}"><li v-for="thu in thulist">{{ thu }}</li></draggable></ul>
+        <ul><draggable :list="frilist" class="dragArea" :options="{group:'lists'}"><li v-for="fri in frilist">{{ fri }}</li></draggable></ul>
+        <ul><draggable :list="satlist" class="dragArea" :options="{group:'lists'}"><li v-for="sat in satlist">{{ sat }}</li></draggable></ul>
+      </div>
+    </div>
+
+  <!--
+  <div id="app">
+    <draggable :list="items" class="dragArea">
+    <div v-for="item in items">
+      {{ item }}
+    </div>
+    </draggable>
+  </div>
+  -->
+
+	<!--
+    <div id="app">
+      <div class="days">
+        <div class="day">日</div>
+        <div class="menus_metas" @mousedown="sample">
+          <div class="menus">
+            <div class="menu" v-for="menu in data.sun.menu">{{ menu }}</div>
+          </div>
+          <div class="metas">
+            <div class="mata" v-for="meta in data.sun.meta">{{ meta }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+	-->
+  </body>
+  <script src="/javascripts/Sortable.min.js"></script>
+  <script src="/javascripts/vue.min.js"></script>
+  <script src="/javascripts/vuedraggable.min.js"></script>
+  <script src="/javascripts/axios.min.js"></script>
+  <script src="/javascripts/index.js"></script>
+</html>

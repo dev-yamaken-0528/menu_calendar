@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>menu calendar</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <div id="app">
+      <div class="days">
+        <div class="day" v-for="item in items" draggable="true" @dragstart="dstart" @dragover="dover" @drop="ddrop" @click="clickDay" :id="item.date">
+          <div>{{ item.date }}</div>
+          <div class="menu" v-for="menu in item.menus">{{ menu }}</div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+  <script src="/javascripts/Sortable.min.js"></script>
+  <script src="/javascripts/vue.min.js"></script>
+  <script src="/javascripts/vuedraggable.min.js"></script>
+  <script src="/javascripts/axios.min.js"></script>
+  <script src="/javascripts/index.js"></script>
+</html>

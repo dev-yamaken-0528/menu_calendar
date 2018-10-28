@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='UTF-8'>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>ピクロス</title>
+    <link rel='stylesheet' href='/stylesheets/normalize.css'>
+    <link rel='stylesheet' href='/stylesheets/style.css'>
+  </head>
+  <body>
+    <div id="app">
+
+      <h1>作成</h1>
+      
+      <hr>
+
+      <span>マス目</span>
+      <select v-model="selected" @change="changeSize(selected)">
+        <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+      </select>
+
+      <table class="square_table">
+        <tr v-for="(row,rowindex) in savedata">
+          <td v-for="(cell,colindex) in row" :id="(rowindex+'_'+colindex)" @click="selectedCell(rowindex,colindex)" class="square_td"></td>
+        </tr>
+      </table>
+
+      <hr>
+
+      <div class="key">
+        <div class="cross">
+          <button @click="keyCross('top', arguments[0])"    class="cross_top cross_btn">&#x25B2;</button>
+          <button @click="keyCross('bottom', arguments[0])" class="cross_bottom cross_btn">&#x25BC;</button>
+          <button @click="keyCross('left', arguments[0])"   class="cross_left cross_btn">&#x25C0;</button>
+          <button @click="keyCross('right', arguments[0])"  class="cross_right cross_btn">&#x25B6;</button>
+        </div>
+        <button @click="keySelect" class="key_btn">&#9632;</button>
+      </div>
+
+      <hr>
+
+      <form action="/create/save" method="post">
+        <input type="text" name="stagetitle" value="">
+        <input type="hidden" id="size" name="size" v-model="selected"></input>
+        <input type="hidden" id="savedata" name="savedata">
+        <input type="submit" value="保存" class="btn">
+      </form>
+
+      <hr>
+
+      <p><a href="/">HOME</a></p>
+
+    </div>
+  </body>
+  <script src="/javascripts/vue.min.js"></script>
+  <script src="/javascripts/create.js"></script>
+</html>
