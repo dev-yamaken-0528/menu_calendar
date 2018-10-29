@@ -1,29 +1,12 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.calendar{
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
 }
-
-a {
-  color: #00B7FF;
-}
-
-.days {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.day {
-  width: 150px;
-  height: 100px;
+.day{
   border: solid 1px;
-  margin: 0.3px 0.3px 0.3px 0.3px;
-  overflow: scroll;
-}
-
-.menu {
-  width: 90%;
-}
-
-* {
-  -khtml-user-drag: element;
+  height: 30px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }

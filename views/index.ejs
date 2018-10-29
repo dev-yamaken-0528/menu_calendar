@@ -4,17 +4,47 @@
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>menu calendar</title>
+    <link rel='stylesheet' href='/stylesheets/normalize.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
 
     <div id="app">
-      <div class="days">
-        <div class="day" v-for="item in items" draggable="true" @dragstart="dstart" @dragover="dover" @drop="ddrop" @click="clickDay" :id="item.date">
-          <div>{{ item.date }}</div>
-          <div class="menu" v-for="menu in item.menus">{{ menu }}</div>
-        </div>
+
+      <table class="calendar">
+        <thead>
+          <tr>
+            <th class="day">日</th>
+            <th class="day">月</th>
+            <th class="day">火</th>
+            <th class="day">水</th>
+            <th class="day">木</th>
+            <th class="day">金</th>
+            <th class="day">土</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="day" v-for="item in weekItems(1)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(2)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(3)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(4)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(5)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(6)" :id="item.date" @touchstart="ts" @touchend="te" @mousedown="md" @mouseup="mu">{{ item.date.substr(6,2) }}</td></tr>
+        </tbody>
+      </table>
+
+      <div class="menusArea">
+        <ul>
+          <li v-for="menu in selectedMenus">{{ menu }}</li>
+        </ul>
       </div>
+
+      <div class="materialsArea">
+        <ul>
+          <li v-for="material in selectedMaterials">{{ material }}</li>
+        </ul>
+      </div>
+
     </div>
 
   </body>
