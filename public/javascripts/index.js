@@ -1,3 +1,7 @@
+Vue.component('modal', {
+  template: '#modal-template'
+})
+
 var app = new Vue({
   el: "#app",
   data: {
@@ -46,42 +50,84 @@ var app = new Vue({
       { date:"20180210", menus:[], materials:[] },
     ],
     selectedDay: "",
-    copyfrom: "",
+    isCopy: false,
+    isSelectedFrom: false,
+    copyFromDate: "",
+    copyMsg: "",
+		showModal: false,
+    modalMenus: [],
+    modalMaterials: [],
+    menuText: "",
+    materialText: "",
   },
   created: function(){
   },
   mounted: function(){
   },
   methods: {
-    ts: function(event){
-      this.copyfrom = event.target.id;
-      this.selectedDay = event.target.id;
+    closeModal: function(){
+      this.showModal = false
+      var idx = this.getIdx(this.selectedDay)
+      this.items[idx].menus = this.modalMenus.slice()
+      this.items[idx].materials = this.modalMaterials.slice()
+      this.menuText = ""
+      this.materialText = ""
     },
-    te: function(event){
-      this.copyTo(this.copyfrom, event.target.id);
-      this.copyfrom = "";
+    delMenu: function(idx){
+      this.modalMenus.splice(idx,1)
     },
-    md: function(event){
-      this.copyfrom = event.target.id;
-      this.selectedDay = event.target.id;
+    delMaterial: function(idx){
+      this.modalMaterials.splice(idx,1)
     },
-    mu: function(event){
-      this.copyTo(this.copyfrom, event.target.id);
-      this.copyfrom = "";
-    },
-    copyTo: function(fromdate, todate){
-      var fromidx=0;
-      var toindex=0;
+    getIdx: function(date){
+      var ret=-1;
       for(var i=0; i<this.items.length; i++){
-        if(this.items[i].date == fromdate){
-          fromidx = i;
-        }
-        if(this.items[i].date == todate){
-          toidx = i;
+        if(this.items[i].date==date){
+          ret = i
         }
       }
-      this.items[toidx].menus = this.items[fromidx].menus;
-      this.items[toidx].materials = this.items[fromidx].materials;
+      return ret
+    },
+    addMenu: function(){
+      this.modalMenus.push(this.menuText)
+    },
+    addMaterial: function(){
+      this.modalMaterials.push(this.materialText)
+    },
+    dbl: function(event){
+      var idx = this.getIdx(this.selectedDay)
+      this.modalMenus = this.items[idx].menus.slice()
+      this.modalMaterials = this.items[idx].materials.slice()
+      this.showModal = true
+    },
+    select: function(event){
+      this.selectedDay = event.target.id
+      if(this.isSelectedFrom){
+        this.copy(this.copyFromDate, this.selectedDay)
+        this.isCopy = false
+        this.isSelectedFrom = false
+        this.copyMsg = ""
+      }
+      if(this.isCopy){
+        this.copyMsg = "コピー[先]の日付を選んで"
+        this.isSelectedFrom = true
+        this.copyFromDate = this.selectedDay
+      }
+    },
+    copyToggle: function(){
+      if(this.isCopy){
+        this.isCopy = false
+        this.copyMsg = ""
+      }else{
+        this.isCopy = true
+        this.copyMsg = "コピー[元]の日付を選んで"
+      }
+    },
+    copy: function(fromdate, todate){
+      var toidx = this.getIdx(todate)
+      var fromidx = this.getIdx(fromdate)
+      this.items[toidx].menus = this.items[fromidx].menus.slice();
+      this.items[toidx].materials = this.items[fromidx].materials.slice();
     },
     weekItems: function(week){
       var idx = 0;
@@ -101,22 +147,14 @@ var app = new Vue({
   },
   computed: {
     selectedMaterials: function(){
-      var ret=[];
-      for(var i=0; i<this.items.length; i++){
-        if(this.selectedDay == this.items[i].date){
-          ret=this.items[i].materials;
-        }
+      if(this.selectedDay){
+        return this.items[this.getIdx(this.selectedDay)].materials
       }
-      return ret;
     },
     selectedMenus: function(){
-      var ret=[];
-      for(var i=0; i<this.items.length; i++){
-        if(this.selectedDay == this.items[i].date){
-          ret=this.items[i].menus;
-        }
+      if(this.selectedDay){
+        return this.items[this.getIdx(this.selectedDay)].menus
       }
-      return ret;
     },
   },
 })
