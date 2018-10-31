@@ -94,7 +94,7 @@ var app = new Vue({
     addMaterial: function(){
       this.modalMaterials.push(this.materialText)
     },
-    dbl: function(event){
+    editMenu: function(){
       var idx = this.getIdx(this.selectedDay)
       this.modalMenus = this.items[idx].menus.slice()
       this.modalMaterials = this.items[idx].materials.slice()

@@ -72,16 +72,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select" @dblclick="dbl">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          <tr><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
         </tbody>
       </table>
 
       <div>
+        <button @click="editMenu">Edit</button>
         <button @click="copyToggle">Copy</button>
         {{ copyMsg }}
       </div>
