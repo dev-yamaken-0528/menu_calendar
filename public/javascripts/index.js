@@ -51,9 +51,8 @@ var app = new Vue({
     ],
     selectedDay: "",
     isCopy: false,
-    isSelectedFrom: false,
-    copyFromDate: "",
-    copyMsg: "",
+    copyFrom: "",
+    msg: "",
 		showModal: false,
     modalMenus: [],
     modalMaterials: [],
@@ -90,38 +89,35 @@ var app = new Vue({
     },
     addMenu: function(){
       this.modalMenus.push(this.menuText)
+      this.menuText = ""
     },
     addMaterial: function(){
       this.modalMaterials.push(this.materialText)
+      this.materialText = ""
     },
-    editMenu: function(){
+    editBtnClick: function(){
       var idx = this.getIdx(this.selectedDay)
       this.modalMenus = this.items[idx].menus.slice()
       this.modalMaterials = this.items[idx].materials.slice()
       this.showModal = true
     },
     select: function(event){
+      this.msg = ""
       this.selectedDay = event.target.id
-      if(this.isSelectedFrom){
-        this.copy(this.copyFromDate, this.selectedDay)
-        this.isCopy = false
-        this.isSelectedFrom = false
-        this.copyMsg = ""
-      }
       if(this.isCopy){
-        this.copyMsg = "コピー[先]の日付を選んで"
-        this.isSelectedFrom = true
-        this.copyFromDate = this.selectedDay
+        this.copy(this.copyFrom, this.selectedDay)
+        this.isCopy = false
+        this.copyFrom = ""
       }
     },
-    copyToggle: function(){
-      if(this.isCopy){
-        this.isCopy = false
-        this.copyMsg = ""
-      }else{
-        this.isCopy = true
-        this.copyMsg = "コピー[元]の日付を選んで"
+    copyBtnClick: function(){
+      if(this.selectedDay == ""){
+        this.msg = "コピーする日付を選んでね"
+        return false
       }
+      this.isCopy = true
+      this.copyFrom = this.selectedDay
+      this.msg = "コピー先の日付を選んでね"
     },
     copy: function(fromdate, todate){
       var toidx = this.getIdx(todate)
