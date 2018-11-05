@@ -6,11 +6,11 @@
 .day{
   border: solid 1px;
   height: 30px;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
 }
-
+.week{
+  border: solid 1px;
+  height: 30px;
+}
 
 
 

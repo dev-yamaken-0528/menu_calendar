@@ -58,12 +58,26 @@ var app = new Vue({
     modalMaterials: [],
     menuText: "",
     materialText: "",
+    materialWeek: [],
+    selectedWeek: "",
   },
   created: function(){
   },
   mounted: function(){
   },
   methods: {
+    clickWeek: function(week){
+      this.selectedWeek = week
+      this.materialWeek = []
+      var weekItems = this.weekItems(week)
+      for(var i=0; i<weekItems.length; i++){
+        for(var j=0; j<weekItems[i].materials.length; j++){
+          if(this.materialWeek.indexOf(weekItems[i].materials[j]) == -1){
+            this.materialWeek.push(weekItems[i].materials[j])
+          }
+        }
+      }
+    },
     closeModal: function(){
       this.showModal = false
       var idx = this.getIdx(this.selectedDay)

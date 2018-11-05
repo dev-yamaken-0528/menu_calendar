@@ -59,36 +59,51 @@
         </div>
   		</modal>
 
-      <table class="calendar">
-        <thead>
-          <tr>
-            <th class="day">日</th>
-            <th class="day">月</th>
-            <th class="day">火</th>
-            <th class="day">水</th>
-            <th class="day">木</th>
-            <th class="day">金</th>
-            <th class="day">土</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-          <tr><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-        </tbody>
-      </table>
+      <div>
+      
+        <table class="calendar">
+          <thead>
+            <tr>
+              <th class="week"></th>
+              <th class="day">日</th>
+              <th class="day">月</th>
+              <th class="day">火</th>
+              <th class="day">水</th>
+              <th class="day">木</th>
+              <th class="day">金</th>
+              <th class="day">土</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="week" @click="clickWeek(1)">1W</td><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(2)">2W</td><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(3)">3W</td><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(4)">4W</td><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(5)">5W</td><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(6)">6W</td><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+          </tbody>
+        </table>
+        <div>
+          <button>Prev</button>
+          <button>Next</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <p>{{ msg }}</p>
+
+      <hr>
 
       <div>
-        <p>{{ msg }}</p>
         <button @click="editBtnClick">Edit</button>
         <button @click="copyBtnClick">Copy</button>
       </div>
 
+      <hr>
+
       <div>
-        {{ selectedDay }}
+        <p>選択中の年月日:{{ selectedDay }}</p>
         <div class="menusArea">
           <ul>
             <li v-for="menu in selectedMenus">{{ menu }}</li>
@@ -99,6 +114,15 @@
             <li v-for="material in selectedMaterials">{{ material }}</li>
           </ul>
         </div>
+      </div>
+
+      <hr>
+
+      <div>
+        <p>選択中の週:{{ selectedWeek }}週目</p>
+        <ul>
+          <li v-for="week in materialWeek">{{ week }}</li>
+        </ul>
       </div>
 
     </div>
