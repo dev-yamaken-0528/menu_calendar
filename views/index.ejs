@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>menu calendar</title>
     <link rel='stylesheet' href='/stylesheets/normalize.css' />
+    <link rel='stylesheet' href='/stylesheets/petal.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
@@ -32,21 +33,23 @@
       </transition>
     </script>
 
-    <div id="app">
+    <div id="app" class="main">
 
   		<modal v-if="showModal">
         <div slot="header">
-          {{ selectedDay }}
+          <h6>{{ selectedDay }}</h6>
         </div>
         <div slot="body">
-          <h2>Menus</h2>
+          <hr>
+          <h6>メニュー</h6>
           <input type="text" v-model="menuText"/><button @click="addMenu">add</button>
           <ul>
             <li v-for="menu,idx in modalMenus">
               {{ menu }}<button @click="delMenu(idx)">X</button>
             </li>
           </ul>
-          <h2>Materials</h2>
+          <hr>
+          <h6>材料</h6>
           <input type="text" v-model="materialText"/><button @click="addMaterial">add</button>
           <ul>
             <li v-for="material,idx in modalMaterials">
@@ -83,54 +86,49 @@
             <tr><td class="week" @click="clickWeek(6)">6W</td><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
           </tbody>
         </table>
+      </div>
+
+      <hr>
+
+      <div class="buttons">
+        <!--
         <div>
-          <button>Prev</button>
-          <button>Next</button>
+          <button disabled class="btn">Prev</button>
+          <button disabled class="btn">Next</button>
         </div>
-      </div>
-
-      <hr>
-
-      <p>{{ msg }}</p>
-
-      <hr>
-
-      <div>
-        <button @click="editBtnClick">Edit</button>
-        <button @click="copyBtnClick">Copy</button>
+        -->
+        <div>
+          <button class="btn compact" @click="editBtnClick">Edit</button>
+          <button class="btn compact" @click="copyBtnClick">Copy</button>
+        </div>
+        <p>{{ msg }}</p>
       </div>
 
       <hr>
 
       <div>
-        <p>選択中の年月日:{{ selectedDay }}</p>
+        <h5>年月日[{{ selectedDay }}]</h5>
         <div class="menusArea">
-          <ul>
-            <li v-for="menu in selectedMenus">{{ menu }}</li>
-          </ul>
+          <h6>メニュー</h6>
+          <span v-for="menu in selectedMenus">[{{ menu }}]</span>
         </div>
         <div class="materialsArea">
-          <ul>
-            <li v-for="material in selectedMaterials">{{ material }}</li>
-          </ul>
+          <h6>材料</h6>
+          <span v-for="material in selectedMaterials">[{{ material }}]</span>
         </div>
       </div>
 
       <hr>
 
       <div>
-        <p>選択中の週:{{ selectedWeek }}週目</p>
-        <ul>
-          <li v-for="week in materialWeek">{{ week }}</li>
-        </ul>
+        <h5>選択週[{{ selectedWeek }}]の材料</h5>
+        <span v-for="week in materialWeek">[{{ week }}]</span>
       </div>
 
     </div>
 
   </body>
-  <script src="/javascripts/Sortable.min.js"></script>
   <script src="/javascripts/vue.min.js"></script>
-  <script src="/javascripts/vuedraggable.min.js"></script>
   <script src="/javascripts/axios.min.js"></script>
   <script src="/javascripts/index.js"></script>
 </html>

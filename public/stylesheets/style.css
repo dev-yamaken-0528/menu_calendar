@@ -1,7 +1,19 @@
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.main{
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .calendar{
   border-collapse: collapse;
   border-spacing: 0;
   width: 100%;
+  text-align: center;
 }
 .day{
   border: solid 1px;
@@ -12,6 +24,9 @@
   height: 30px;
 }
 
+.buttons{
+  text-align: center;
+}
 
 
 .modal-mask {
