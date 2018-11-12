@@ -117,7 +117,11 @@ var app = new Vue({
     },
     select: function(event){
       this.msg = ""
+      if(this.selectedDay != ""){
+        document.getElementById(this.selectedDay).style.backgroundColor = "white"
+      }
       this.selectedDay = event.target.id
+      document.getElementById(this.selectedDay).style.backgroundColor = "gray"
       if(this.isCopy){
         this.copy(this.copyFrom, this.selectedDay)
         this.isCopy = false

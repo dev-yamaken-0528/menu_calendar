@@ -28,6 +28,9 @@
   text-align: center;
 }
 
+.addText{
+  width: 50%;
+}
 
 .modal-mask {
   position: fixed;

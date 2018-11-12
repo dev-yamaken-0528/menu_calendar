@@ -42,23 +42,23 @@
         <div slot="body">
           <hr>
           <h6>メニュー</h6>
-          <input type="text" v-model="menuText"/><button @click="addMenu">add</button>
+          <input type="text" class="addText" v-model="menuText"/><button class="btn compact" @click="addMenu">add</button>
           <ul>
             <li v-for="menu,idx in modalMenus">
-              {{ menu }}<button @click="delMenu(idx)">X</button>
+              {{ menu }}<button class="btn compact" @click="delMenu(idx)">X</button>
             </li>
           </ul>
           <hr>
           <h6>材料</h6>
-          <input type="text" v-model="materialText"/><button @click="addMaterial">add</button>
+          <input type="text" class="addText" v-model="materialText"/><button class="btn compact" @click="addMaterial">add</button>
           <ul>
             <li v-for="material,idx in modalMaterials">
-              {{ material }} <button @click="delMaterial(idx)">X</button>
+              {{ material }} <button class="btn compact" @click="delMaterial(idx)">X</button>
             </li>
           </ul>
         </div>
         <div slot="footer">
-          <button @click="closeModal">close</button>
+          <button class="btn compact" @click="closeModal">close</button>
         </div>
   		</modal>
 
