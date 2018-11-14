@@ -63,7 +63,10 @@
   		</modal>
 
       <div>
-      
+        {{ yyyymm }}
+      </div>
+
+      <div>
         <table class="calendar">
           <thead>
             <tr>
@@ -91,16 +94,11 @@
       <hr>
 
       <div class="buttons">
-        <!--
-        <div>
-          <button disabled class="btn">Prev</button>
-          <button disabled class="btn">Next</button>
-        </div>
-        -->
-        <div>
-          <button class="btn compact" @click="editBtnClick">Edit</button>
-          <button class="btn compact" @click="copyBtnClick">Copy</button>
-        </div>
+        <button class="btn compact" @click="prevBtnClick">Prev</button>
+        <button class="btn compact" @click="nextBtnClick">Next</button>
+        <button class="btn compact" @click="editBtnClick">Edit</button>
+        <button class="btn compact" @click="copyBtnClick">Copy</button>
+        <button class="btn compact" @click="saveBtnClick">Save</button>
         <p>{{ msg }}</p>
       </div>
 
