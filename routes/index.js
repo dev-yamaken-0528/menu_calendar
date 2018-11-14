@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/save', function(req, res, next){
   var saveitems = req.body.saveitems
-
   var items =  JSON.parse(fs.readFileSync('./data/data.json', 'utf8'))
   for(var i=0; i<items.length; i++){
     for(var j=0; j<saveitems.length; j++){
@@ -20,9 +19,7 @@ router.post('/save', function(req, res, next){
       }
     }
   }
-
   fs.writeFileSync("./data/data.json", JSON.stringify(items))
-
   res.send("save")
 })
 
@@ -61,7 +58,7 @@ router.get('/yyyymm/:yyyymm', function(req, res, next){
   // 前月分を追加する
   var idx = previousItems.length-1
   for(var i=currentItems[0].day; i>0; i--){
-    items.push(previousItems[idx])
+    items.unshift(previousItems[idx])
     idx--
   }
   // 当月分を追加する

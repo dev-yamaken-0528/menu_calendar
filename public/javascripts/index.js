@@ -85,6 +85,11 @@ var app = new Vue({
       this.yyyymm = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2)
       axios.get('/yyyymm/'+this.yyyymm)
         .then((res)=>{
+          if(this.selectedDay != ""){
+            document.getElementById(this.selectedDay).style.backgroundColor = "white"
+          }
+          this.selectedDay = ""
+          this.selectedWeek = ""
           this.items = res.data
         })
     },
@@ -94,6 +99,11 @@ var app = new Vue({
       this.yyyymm = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2)
       axios.get('/yyyymm/'+this.yyyymm)
         .then((res)=>{
+          if(this.selectedDay != ""){
+            document.getElementById(this.selectedDay).style.backgroundColor = "white"
+          }
+          this.selectedDay = ""
+          this.selectedWeek = ""
           this.items = res.data
         })
     },
