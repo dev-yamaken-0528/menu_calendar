@@ -3,7 +3,7 @@
   <head>
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>menu calendar</title>
+    <title>献立カレンダー</title>
     <link rel='stylesheet' href='/stylesheets/normalize.css' />
     <link rel='stylesheet' href='/stylesheets/petal.min.css' />
     <link rel='stylesheet' href='/stylesheets/style.css' />
@@ -37,40 +37,46 @@
 
   		<modal v-if="showModal">
         <div slot="header">
-          <h6>{{ selectedDay }}</h6>
+          <h2>{{ selectedDay }}</h2>
         </div>
         <div slot="body">
           <hr>
-          <h6>メニュー</h6>
-          <input type="text" class="addText" v-model="menuText"/><button class="btn compact" @click="addMenu">add</button>
-          <ul>
-            <li v-for="menu,idx in modalMenus">
-              {{ menu }}<button class="btn compact" @click="delMenu(idx)">X</button>
-            </li>
-          </ul>
+          <div class="input-group">
+            <label class="input-addon" for="menuText">献立</label>
+            <input type="text" v-model="menuText" id="menuText" class="input input-text"/>
+            <button @click="addMenu" class="btn">追加</button>
+          </div>
+          <p v-for="menu,idx in modalMenus">
+            <span>{{ menu }}</span>
+            <span @click="delMenu(idx)" class="badge danger">X</span>
+          </p>
           <hr>
-          <h6>材料</h6>
-          <input type="text" class="addText" v-model="materialText"/><button class="btn compact" @click="addMaterial">add</button>
-          <ul>
-            <li v-for="material,idx in modalMaterials">
-              {{ material }} <button class="btn compact" @click="delMaterial(idx)">X</button>
-            </li>
-          </ul>
+          <div class="input-group">
+            <label class="input-addon" for="materialText">材料</label>
+            <input type="text" v-model="materialText" id="materialText" class="input input-text"/>
+            <button @click="addMaterial" class="btn">追加</button>
+          </div>
+          <p v-for="material,idx in modalMaterials">
+            <span>{{ material }}</span>
+            <span @click="delMaterial(idx)" class="badge danger">X</span>
+          </p>
         </div>
         <div slot="footer">
-          <button class="btn compact" @click="closeModal">close</button>
+          <hr>
+          <button @click="closeModal">閉じる</button>
         </div>
   		</modal>
 
-      <div>
-        {{ yyyymm }}
+      <div class="title">
+        <h1>献立カレンダー</h1>
+        <h2>{{ yyyymm }}</h2>
       </div>
 
       <div>
         <table class="calendar">
           <thead>
             <tr>
-              <th class="week"></th>
+              <th class="week">週</th>
               <th class="day">日</th>
               <th class="day">月</th>
               <th class="day">火</th>
@@ -81,47 +87,51 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td class="week" @click="clickWeek(1)">1W</td><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-            <tr><td class="week" @click="clickWeek(2)">2W</td><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-            <tr><td class="week" @click="clickWeek(3)">3W</td><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-            <tr><td class="week" @click="clickWeek(4)">4W</td><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-            <tr><td class="week" @click="clickWeek(5)">5W</td><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
-            <tr><td class="week" @click="clickWeek(6)">6W</td><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(1)"><span class="badge warning">1</span></td><td class="day" v-for="item in weekItems(1)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(2)"><span class="badge warning">2</span></td><td class="day" v-for="item in weekItems(2)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(3)"><span class="badge warning">3</span></td><td class="day" v-for="item in weekItems(3)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(4)"><span class="badge warning">4</span></td><td class="day" v-for="item in weekItems(4)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(5)"><span class="badge warning">5</span></td><td class="day" v-for="item in weekItems(5)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
+            <tr><td class="week" @click="clickWeek(6)"><span class="badge warning">6</span></td><td class="day" v-for="item in weekItems(6)" :id="item.date" @click="select">{{ item.date.substr(6,2) }}</td></tr>
           </tbody>
         </table>
+        <div class="buttons">
+          <button @click="prevBtnClick" class="btn">前月</button>
+          <button @click="nextBtnClick" class="btn">次月</button>
+        </div>
       </div>
 
-      <hr>
-
       <div class="buttons">
-        <button class="btn compact" @click="prevBtnClick">Prev</button>
-        <button class="btn compact" @click="nextBtnClick">Next</button>
-        <button class="btn compact" @click="editBtnClick">Edit</button>
-        <button class="btn compact" @click="copyBtnClick">Copy</button>
-        <button class="btn compact" @click="saveBtnClick">Save</button>
+        <button @click="editBtnClick" class="btn">編集</button>
+        <button @click="copyBtnClick" class="btn">複製</button>
+        <button @click="saveBtnClick" class="btn">保存</button>
         <p>{{ msg }}</p>
       </div>
 
-      <hr>
-
-      <div>
-        <h5>年月日[{{ selectedDay }}]</h5>
-        <div class="menusArea">
-          <h6>メニュー</h6>
-          <span v-for="menu in selectedMenus">[{{ menu }}]</span>
+      <div v-if="selectedDay" class="disp-area">
+        <span>選択日</span>
+        <span class="badge okay">{{ selectedDay }}</span>
+        <div>
+          <span>献立</span>
+          <span v-for="menu in selectedMenus" class="badge okay">{{ menu }}</span>
         </div>
-        <div class="materialsArea">
-          <h6>材料</h6>
-          <span v-for="material in selectedMaterials">[{{ material }}]</span>
+        <div>
+          <span>材料</span>
+          <span v-for="material in selectedMaterials" class="badge okay">{{ material }}</span>
+        </div>
+      </div>
+
+      <div v-if="selectedWeek" class="disp-area">
+        <span>選択週</span>
+        <span class="badge warning">{{ selectedWeek }}</span>
+        <div>
+          <span>材料</span>
+          <span v-for="week in materialWeek" class="badge warning">{{ week }}</span>
         </div>
       </div>
 
       <hr>
-
-      <div>
-        <h5>選択週[{{ selectedWeek }}]の材料</h5>
-        <span v-for="week in materialWeek">[{{ week }}]</span>
-      </div>
+      <span>※保存を押すまで保存されないよ</span>
 
     </div>
 

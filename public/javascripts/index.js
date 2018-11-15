@@ -70,6 +70,8 @@ var app = new Vue({
     axios.get('/yyyymm/'+this.yyyymm)
       .then((res)=>{
         this.items = res.data
+        var today = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2) + ('00'+d.getDate()).slice(-2)
+        this.selectedDay = today
       })
   },
   methods: {
@@ -171,12 +173,12 @@ var app = new Vue({
     },
     copyBtnClick: function(){
       if(this.selectedDay == ""){
-        this.msg = "コピーする日付を選んでね"
+        this.msg = "複製する日付を選んでね"
         return false
       }
       this.isCopy = true
       this.copyFrom = this.selectedDay
-      this.msg = "コピー先の日付を選んでね"
+      this.msg = "複製先の日付を選んでね"
     },
     copy: function(fromdate, todate){
       var toidx = this.getIdx(todate)
