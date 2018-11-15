@@ -77,6 +77,9 @@ var app = new Vue({
   methods: {
     saveBtnClick: function(){
       axios.post('/save', {saveitems:this.items})
+        .then((res)=>{
+          this.msg = "保存しました"
+        })
     },
     prevBtnClick: function(){
       if(this.yyyymm <= '201811'){
