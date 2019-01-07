@@ -48,8 +48,8 @@
             <button @click="addMenu" class="btn">追加</button>
           </div>
           <p v-for="menu,idx in modalMenus">
-            <span>{{ menu }}</span>
             <span @click="delMenu(idx)" class="badge danger">X</span>
+            <span>{{ menu }}</span>
           </p>
           <hr>
           <div class="input-group">
@@ -58,13 +58,13 @@
             <button @click="addMaterial" class="btn">追加</button>
           </div>
           <p v-for="material,idx in modalMaterials">
-            <span>{{ material }}</span>
             <span @click="delMaterial(idx)" class="badge danger">X</span>
+            <span>{{ material }}</span>
           </p>
         </div>
         <div slot="footer">
           <hr>
-          <button @click="closeModal">閉じる</button>
+          <button @click="closeModal" class="btn">閉じる</button>
         </div>
   		</modal>
 
@@ -132,7 +132,8 @@
       </div>
 
       <hr>
-      <span>※保存を押すまで保存されないよ</span>
+      <p>※保存を押すまで保存されないよ</p>
+      <p>※今日の日付({{ toDay }})</p>
 
     </div>
 

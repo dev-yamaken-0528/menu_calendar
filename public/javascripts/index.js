@@ -50,6 +50,7 @@ var app = new Vue({
       { date:"", day:0, menus:[], materials:[] },
       { date:"", day:0, menus:[], materials:[] },
     ],
+    toDay: "",
     selectedDay: "",
     isCopy: false,
     copyFrom: "",
@@ -70,8 +71,11 @@ var app = new Vue({
     axios.get('/yyyymm/'+this.yyyymm)
       .then((res)=>{
         this.items = res.data
-        var today = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2) + ('00'+d.getDate()).slice(-2)
-        this.selectedDay = today
+      })
+      .then(()=>{
+        this.toDay = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2) + ('00'+d.getDate()).slice(-2)
+        this.selectedDay = this.toDay
+        document.getElementById(this.selectedDay).style.backgroundColor = "gray"
       })
   },
   methods: {
