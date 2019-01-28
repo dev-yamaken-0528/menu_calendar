@@ -68,7 +68,7 @@ var app = new Vue({
   mounted: function(){
     var d = new Date()
     this.yyyymm = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2)
-    axios.get('/yyyymm/'+this.yyyymm)
+    axios.get('/menucalendar/yyyymm/'+this.yyyymm)
       .then((res)=>{
         this.items = res.data
       })
@@ -80,7 +80,7 @@ var app = new Vue({
   },
   methods: {
     saveBtnClick: function(){
-      axios.post('/save', {saveitems:this.items})
+      axios.post('/menucalendar/save', {saveitems:this.items})
         .then((res)=>{
           this.msg = "保存しました"
         })
@@ -92,7 +92,7 @@ var app = new Vue({
       var d = new Date( this.yyyymm.slice(0,4) + "-" + this.yyyymm.slice(4,6) + "-01" )
       d.setMonth(d.getMonth()-1)
       this.yyyymm = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2)
-      axios.get('/yyyymm/'+this.yyyymm)
+      axios.get('/menucalendar/yyyymm/'+this.yyyymm)
         .then((res)=>{
           if(this.selectedDay != ""){
             document.getElementById(this.selectedDay).style.backgroundColor = "white"
@@ -106,7 +106,7 @@ var app = new Vue({
       var d = new Date( this.yyyymm.slice(0,4) + "-" + this.yyyymm.slice(4,6) + "-01" )
       d.setMonth(d.getMonth()+1)
       this.yyyymm = d.getFullYear() + ('00'+(d.getMonth()+1)).slice(-2)
-      axios.get('/yyyymm/'+this.yyyymm)
+      axios.get('/menucalendar/yyyymm/'+this.yyyymm)
         .then((res)=>{
           if(this.selectedDay != ""){
             document.getElementById(this.selectedDay).style.backgroundColor = "white"

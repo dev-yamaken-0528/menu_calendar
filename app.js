@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+var favicon = require('serve-favicon');
 
 var indexRouter = require('./routes/index');
 var login = require('./routes/login');
@@ -18,7 +19,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/menucalendar', express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
 
 app.use(session({
   // 必須項目（署名を行うために使います）
@@ -38,8 +40,8 @@ app.use(session({
   }
 }));
 
-app.use('/', indexRouter);
-app.use('/login', login);
+app.use('/menucalendar', indexRouter);
+app.use('/menucalendar/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

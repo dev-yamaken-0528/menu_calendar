@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   if(req.body.username=="kyama" && req.body.userpass=="kyama"){
     req.session.username = "kyama"
-    res.redirect('../')
+    res.redirect('/menucalendar/')
   }else{
     res.render('login', { msg:"wrong user" })
   }
