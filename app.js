@@ -3,8 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -18,7 +20,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(session({
+  // 必須項目（署名を行うために使います）
+  secret: 'secret',
+  // 推奨項目（セッション内容に変更がない場合にも保存する場合にはtrue）
+  resave: false,
+  // 推奨項目（新規にセッションを生成して何も代入されていなくても値を入れる場合にはtrue）
+  saveUninitialized: true,
+  // アクセスの度に、有効期限を伸ばす場合にはtrue
+  rolling: true,
+  // クッキー名（デフォルトでは「connect.sid」）
+  name: 'sample-cookie',
+  // 一般的なCookie指定
+  // デフォルトは「{ path: '/', httpOnly: true, secure: false, maxAge: null }」
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 30,
+  }
+}));
+
 app.use('/', indexRouter);
+app.use('/login', login);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
