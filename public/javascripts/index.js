@@ -79,6 +79,10 @@ var app = new Vue({
       })
   },
   methods: {
+    modalSave: function(){
+      this.closeModal()
+      this.saveBtnClick()
+    },
     saveBtnClick: function(){
       axios.post('/menucalendar/save', {saveitems:this.items})
         .then((res)=>{
